@@ -1,7 +1,5 @@
-
 import React, { useState } from "react";
-// axios instance with withCredentials:true
-import axios from "./axiosInstance";
+import axios from "./axiosInstance"; // Axios instance with withCredentials: true
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -33,7 +31,6 @@ const Signup = () => {
         }
       }
     } catch (error) {
-      // Handle errors and set error message
       console.error("Signup error:", error);
       if (error.response && error.response.data) {
         setError(error.response.data.message || "Something went wrong.");
@@ -44,92 +41,77 @@ const Signup = () => {
   };
 
   return (
-    <section className="vh-100">
-      <div className="container py-5 h-100">
-        <div className="row d-flex align-items-center justify-content-center h-100">
-          <div className="col-md-8 col-lg-7 col-xl-6">
+    <section className="d-flex align-items-center justify-content-center vh-100">
+      <div className="container">
+        <div className="row d-flex align-items-center justify-content-center">
+          {/* Left Image Column */}
+          <div className="col-lg-6 col-md-8 d-none d-md-block text-center">
             <img
               src="https://signup.zerodha.com/assets/landing-DQ76ex-B.svg"
               className="img-fluid"
               alt="Phone"
+              style={{ maxWidth: "80%" }}
             />
           </div>
-          <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-            <form onSubmit={handleSubmit}>
-              {/* Name input */}
-              <div className="form-outline mb-4">
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  id="form1Example01"
-                  className="form-control form-control-lg"
-                  required
-                />
-                <label className="form-label" htmlFor="form1Example01">
-                  Full Name
-                </label>
-              </div>
 
-              {/* Email input */}
-              <div className="form-outline mb-4">
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  id="form1Example13"
-                  className="form-control form-control-lg"
-                  required
-                />
-                <label className="form-label" htmlFor="form1Example13">
-                  Email address
-                </label>
-              </div>
-
-              {/* Password input */}
-              <div className="form-outline mb-4">
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  id="form1Example23"
-                  className="form-control form-control-lg"
-                  required
-                />
-                <label className="form-label" htmlFor="form1Example23">
-                  Password
-                </label>
-              </div>
-
-              <div className="d-flex justify-content-around align-items-center mb-4">
-                {/* Checkbox */}
-                <div className="form-check">
+          {/* Signup Form Column */}
+          <div className="col-lg-5 col-md-8">
+            <div className="card shadow p-4">
+              <h3 className="text-center mb-4">Sign Up</h3>
+              <form onSubmit={handleSubmit}>
+                {/* Name input */}
+                <div className="form-group mb-3">
+                  <label>Full Name</label>
                   <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="form1Example3"
-                    defaultChecked
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="form-control"
+                    required
                   />
-                  <label className="form-check-label" htmlFor="form1Example3">
-                    Remember me
-                  </label>
                 </div>
-              </div>
 
-              {/* Submit button */}
-              <button
-                type="submit"
-                className="btn btn-primary btn-lg btn-block"
-              >
-                Sign up
-              </button>
+                {/* Email input */}
+                <div className="form-group mb-3">
+                  <label>Email address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="form-control"
+                    required
+                  />
+                </div>
 
-              {error && <p className="text-danger mt-3">{error}</p>}
-            </form>
+                {/* Password input */}
+                <div className="form-group mb-3">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="form-control"
+                    required
+                  />
+                </div>
+
+                {/* Remember Me */}
+                <div className="form-check mb-3">
+                  <input className="form-check-input" type="checkbox" defaultChecked />
+                  <label className="form-check-label">Remember me</label>
+                </div>
+
+                {/* Submit button */}
+                <button type="submit" className="btn btn-primary w-100">
+                  Sign up
+                </button>
+
+                {error && <p className="text-danger mt-3">{error}</p>}
+              </form>
+            </div>
           </div>
         </div>
       </div>

@@ -4,43 +4,34 @@ function Universe() {
   return (
     <div className="container mt-5">
       <div className="row text-center">
-
         <h1 className="text-muted mt-3">The TraDexa Universe</h1>
-        <p className="text-muted mt-3">Extend your trading and investment experience even further with our partner platforms</p>
-        
-         <div className="col-4 p-3 mt-5">
-            <img src="media/images/smallcaseLogo.png"alt="" />
-            <p className="text-small text-muted p-3 "> Thematic investing platform .</p>
-         </div>
-         <div className="col-4 p-3 mt-5">
-         <img src="media/images/streakLogo.png"alt=""  style={{width:"45%"}}/>
-         <p className="text-small text-muted p-3"> Algo & strategy platform  </p>
-         </div>
-         <div className="col-4 p-3 mt-5">
-         <img src="media/images/sensibullLogo.svg"alt="" style={{width:"85%"}} />   
-         <p className="text-small text-muted p-4"> Option trading platform.</p>
-         </div>
+        <p className="text-muted mt-3">
+          Extend your trading and investment experience even further with our partner platforms
+        </p>
 
+        {/* Platforms Grid */}
+        <div className="row mt-4">
+          {[
+            { src: "media/images/smallcaseLogo.png", text: "Thematic investing platform", width: "100%" },
+            { src: "media/images/streakLogo.png", text: "Algo & strategy platform", width: "45%" },
+            { src: "media/images/sensibullLogo.svg", text: "Option trading platform", width: "85%" },
+            { src: "media/images/zerodhaFundhouse.png", text: "Asset management", width: "50%" },
+            { src: "media/images/goldenpiLogo.png", text: "Bond trading platform", width: "100%" },
+            { src: "media/images/dittoLogo.png", text: "Insurance", width: "30%" },
+          ].map((item, index) => (
+            <div key={index} className="col-md-4 col-sm-6 col-12 p-3 d-flex flex-column align-items-center">
+              <img src={item.src} alt="" style={{ width: item.width, maxWidth: "150px" }} />
+              <p className="text-small text-muted text-center p-2">{item.text}</p>
+            </div>
+          ))}
+        </div>
 
-         <div className="col-4 p-3 mt-2">
-            <img src="media/images/zerodhaFundhouse.png"alt=""  style={{width:"50%"}}/>
-            <p className="text-small text-muted p-3">  Asset management </p>
-         </div>
-         <div className="col-4 p-3 mt-2">
-         <img src="media/images/goldenpiLogo.png"alt="" />
-         <p className="text-small text-muted p-3"> Bond trading platform.</p>
-         </div>
-         <div className="col-4 p-3 mt-2">
-         <img src="media/images/dittoLogo.png"alt="" style={{width:"30%"}} />
-         <p className="text-small text-muted p-3 "> Insurance</p>
-         </div>
-
-         <button
-          className="p-2 btn btn-primary fs-5 mb-5 mt-3" 
-          style={{ width: "20%", margin: "0 auto" }}
-        >
-          Signup Now
-        </button>
+        {/* Signup Button */}
+        <div className="d-flex justify-content-center mt-3">
+          <button className="p-2 btn btn-primary fs-5 mb-5" style={{ width: "200px" }}>
+            Signup Now
+          </button>
+        </div>
       </div>
     </div>
   );
