@@ -14,7 +14,7 @@ const BuyActionWindow = ({ uid,mode, refreshOrders }) => {
 
   const handleBuyOrSellClick = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/newOrder", {
+      const response = await axios.post("https://tradexabackend.onrender.com/newOrder", {
         name: uid, // Share name
         qty: stockQuantity, // Quantity
         price: stockPrice, // Price
