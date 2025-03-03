@@ -17,7 +17,13 @@ const Positions = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    axios.get("https://tradexabackend.onrender.com/allPositions").then((res) => {
+    axios.get("https://tradexabackend.onrender.com/allPositions",{
+      headers: {
+        "Content-Type": "application/json"
+      },
+      withCredentials: true // ✅ Agar backend cookies ya auth tokens bhej raha hai
+    
+    }).then((res) => {
       // console.log(res.data);
       setAllHoldings(res.data);
     });

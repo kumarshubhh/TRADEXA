@@ -11,7 +11,13 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get("https://tradexabackend.onrender.com/orders");
+      const response = await axios.get("https://tradexabackend.onrender.com/orders",{
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: true // ✅ Agar backend cookies ya auth tokens bhej raha hai
+      
+      });
       setOrders(response.data); // Save orders to state
     } catch (error) {
       console.error("Error fetching orders:", error);

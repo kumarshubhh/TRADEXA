@@ -10,10 +10,22 @@ const Summary = () => {
     // Fetch summary data
     const fetchSummary = async () => {
       try {
-        const summaryResponse = await axios.get("https://tradexabackend.onrender.com/api/summary");
+        const summaryResponse = await axios.get("https://tradexabackend.onrender.com/api/summary",{
+          headers: {
+            "Content-Type": "application/json"
+          },
+          withCredentials: true // ✅ Agar backend cookies ya auth tokens bhej raha hai
+        
+        });
         setSummaryData(summaryResponse.data);
 
-        const holdingsResponse = await axios.get("https://tradexabackend.onrender.com/allHoldings");
+        const holdingsResponse = await axios.get("https://tradexabackend.onrender.com/allHoldings",{
+          headers: {
+            "Content-Type": "application/json"
+          },
+          withCredentials: true // ✅ Agar backend cookies ya auth tokens bhej raha hai
+        
+        });
         setHoldingsCount(holdingsResponse.data.length);
 
         setLoading(false);

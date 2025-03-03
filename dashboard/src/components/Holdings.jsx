@@ -13,7 +13,14 @@ const Holdings = () => {
   // Fetch holdings data from the backend
   const fetchHoldings = async () => {
     try {
-      const res = await axios.get("https://tradexabackend.onrender.com/allHoldings");
+      const res = await axios.get("https://tradexabackend.onrender.com/allHoldings",{
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: true // ✅ Agar backend cookies ya auth tokens bhej raha hai
+      
+
+      });
       setAllHoldings(res.data);
     } catch (error) {
       console.error("Error fetching holdings:", error);
@@ -23,7 +30,13 @@ const Holdings = () => {
   // Handle the delete action for a stock
   const handleDelete = async (stockId) => {
     try {
-      const response = await axios.delete(`https://tradexabackend.onrender.com/deleteHolding/${stockId}`);
+      const response = await axios.delete(`https://tradexabackend.onrender.com/deleteHolding/${stockId}`,{
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: true // ✅ Agar backend cookies ya auth tokens bhej raha hai
+      
+      });
       if (response.status === 200) {
         setAllHoldings((prev) => prev.filter((stock) => stock._id !== stockId)); // Update UI
         console.log("Stock deleted successfully!");

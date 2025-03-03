@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // );
 // app.use(cors());
 
-const allowedOrigins = ['http://localhost:5173', 'https://tradexadashboard.vercel.app/'];
+const allowedOrigins = ['http://localhost:5173', 'https://tradexadashboard.vercel.app'];
 
 app.use(
   cors({
@@ -56,7 +56,7 @@ app.use(
 
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://tradexadashboard.vercel.app/","http://localhost:5173"); // Frontend origin
+  res.header("Access-Control-Allow-Origin", "https://tradexadashboard.vercel.app","http://localhost:5173"); // Frontend origin
   res.header("Access-Control-Allow-Credentials", "true"); // Allow cookies
   res.header(
     "Access-Control-Allow-Headers",
@@ -191,7 +191,7 @@ console.log("Salt:", registeredUser.salt); // Check if salt is generated
           // Send user data to frontend
           res.status(200).json({
               message: "Signup successful",
-              redirectUrl:"https://tradexadashboard.vercel.app/",
+              redirectUrl:"https://tradexadashboard.vercel.app",
               user: { name: registeredUser.name, email: registeredUser.email },
           });
       });
@@ -259,7 +259,7 @@ app.post("/login", async (req, res) => {
                 // Send redirect URL to frontend
                 return res.status(200).json({
                     message: "Login successful",
-                    redirectUrl: "https://tradexadashboard.vercel.app/", // Redirect to dashboard folder
+                    redirectUrl: "https://tradexadashboard.vercel.app", // Redirect to dashboard folder
                     user: { name: authenticatedUser.name, email: authenticatedUser.email }
                 });
             });
