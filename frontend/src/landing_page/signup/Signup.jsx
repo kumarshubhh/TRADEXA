@@ -20,7 +20,7 @@ const Signup = () => {
 
     try {
       // Send signup request to the backend
-      const response = await axios.post("http://localhost:3001/signup", formData);
+      const response = await axios.post("https://tradexabackend.onrender.com/signup", formData);
 
       if (response.status === 200) {
         console.log("Signup successful, navigating to dashboard...");

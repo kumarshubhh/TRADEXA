@@ -18,7 +18,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/login", // Ensure this points to the full backend URL
+        "https://tradexabackend.onrender.com/login", // Ensure this points to the full backend URL
         formData,
         {
           withCredentials: true,

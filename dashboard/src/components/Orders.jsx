@@ -11,7 +11,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/orders");
+      const response = await axios.get("https://tradexabackend.onrender.com/orders");
       setOrders(response.data); // Save orders to state
     } catch (error) {
       console.error("Error fetching orders:", error);

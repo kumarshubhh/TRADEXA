@@ -10,10 +10,10 @@ const Summary = () => {
     // Fetch summary data
     const fetchSummary = async () => {
       try {
-        const summaryResponse = await axios.get("http://localhost:3001/api/summary");
+        const summaryResponse = await axios.get("https://tradexabackend.onrender.com/api/summary");
         setSummaryData(summaryResponse.data);
 
-        const holdingsResponse = await axios.get("http://localhost:3001/allHoldings");
+        const holdingsResponse = await axios.get("https://tradexabackend.onrender.com/allHoldings");
         setHoldingsCount(holdingsResponse.data.length);
 
         setLoading(false);

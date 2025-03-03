@@ -13,7 +13,7 @@ const Holdings = () => {
   // Fetch holdings data from the backend
   const fetchHoldings = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/allHoldings");
+      const res = await axios.get("https://tradexabackend.onrender.com/allHoldings");
       setAllHoldings(res.data);
     } catch (error) {
       console.error("Error fetching holdings:", error);
@@ -23,7 +23,7 @@ const Holdings = () => {
   // Handle the delete action for a stock
   const handleDelete = async (stockId) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/deleteHolding/${stockId}`);
+      const response = await axios.delete(`https://tradexabackend.onrender.com/deleteHolding/${stockId}`);
       if (response.status === 200) {
         setAllHoldings((prev) => prev.filter((stock) => stock._id !== stockId)); // Update UI
         console.log("Stock deleted successfully!");

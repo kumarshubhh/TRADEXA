@@ -8,7 +8,7 @@ const Logout = () => {
   useEffect(() => {
     const handleLogout = async () => {
       try {
-        await axios.post("http://localhost:3001/logout", {}, { withCredentials: true });
+        await axios.post("https://tradexabackend.onrender.com/logout", {}, { withCredentials: true });
         console.log("User logged out successfully");
         navigate("/login"); // Redirect to login page after logout
       } catch (error) {
