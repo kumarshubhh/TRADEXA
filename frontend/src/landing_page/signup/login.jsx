@@ -28,7 +28,7 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log("Login successful!", response.data);
-        window.location.href = response.data.redirectUrl || "https://tradexadashboard.vercel.app/";
+        window.location.href = response.data.redirectUrl || "https://tradexadashboard.vercel.app";
       }
     } catch (err) {
       console.error("Login error:", err.response?.data?.message || err.message);
