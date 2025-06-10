@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "./axiosInstance"; // Ensure you have an axios instance configured
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -107,23 +108,15 @@ const Login = () => {
                       </div>
 
                       {/* Links */}
-                      <a className="small text-muted" href="#!">
-                        Forgot password?
-                      </a>
+                      
                       <p className="mb-2" style={{ color: "#393f81" }}>
                         Don't have an account?{" "}
-                        <a href="/signup" style={{ color: "#007BFF" }}>
-                          Register here
-                        </a>
+                        <Link to="/signup" style={{ color: "#007BFF" }}>
+    Register here
+  </Link>
                       </p>
 
-                      <a href="#!" className="small text-muted">
-                        Terms of use
-                      </a>{" "}
-                      |{" "}
-                      <a href="#!" className="small text-muted">
-                        Privacy policy
-                      </a>
+                     
                     </form>
 
                     {/* Error Message */}
