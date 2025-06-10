@@ -34,6 +34,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // );
 // app.use(cors());
 
+const allowedOrigins = [
+  "https://tradexafrontend.vercel.app",
+  "https://tradexadashboard.vercel.app"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
 
 
   
