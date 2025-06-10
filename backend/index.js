@@ -173,25 +173,33 @@ app.post("/signup", async (req, res) => {
   try {
       const { name, email, password } = req.body;
 
+      // Validate inputs
+      if (!name || !email || !password) {
+          return res.status(400).json({ message: "All fields are required" });
+      }
+
+      // Ensure email is unique
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+          return res.status(400).json({ message: "Email already registered" });
+      }
+
       // Create user
       const newUser = new User({ name, email });
-    const registeredUser=  await User.register(newUser, password);
-    console.log("Hash:", registeredUser.hash); // Check if hash is generated
-console.log("Salt:", registeredUser.salt); // Check if salt is generated
+      const registeredUser = await User.register(newUser, password);
 
-    
+      console.log("Registered User:", registeredUser);
 
-      // Manually authenticate the user after signup
+      // Automatically login user
       req.login(registeredUser, (err) => {
           if (err) {
-              console.error("Login error after signup:", err);
+              console.error("Login error:", err);
               return res.status(500).json({ message: "Signup successful, but login failed" });
           }
 
-          // Send user data to frontend
           res.status(200).json({
               message: "Signup successful",
-              redirectUrl:"https://tradexadashboard.vercel.app",
+              redirectUrl: "https://tradexadashboard.vercel.app",
               user: { name: registeredUser.name, email: registeredUser.email },
           });
       });
@@ -200,6 +208,7 @@ console.log("Salt:", registeredUser.salt); // Check if salt is generated
       res.status(500).json({ message: "Signup failed", error: err.message });
   }
 });
+
 
 
 

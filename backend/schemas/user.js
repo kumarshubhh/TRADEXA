@@ -18,7 +18,9 @@ const userSchema = new Schema({
 
 
 
-
-userSchema.plugin(passportLocalMongoose, { usernameField: 'email' }); // Use email as username for login
+userSchema.plugin(passportLocalMongoose, {
+    usernameField: 'email', // Email as username
+    usernameLowerCase: true // Emails ko lowercase me normalize kare
+});
 
 module.exports = mongoose.model('User', userSchema);
