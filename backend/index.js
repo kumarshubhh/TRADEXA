@@ -431,8 +431,12 @@ app.get("/orders", async (req, res) => {
 
 
 app.get("/api/summary", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
   res.json({
-    username: "Shubhanshu",
+    username: req.user.name, // 👈 logged-in user ka name yahan se milega
     marginAvailable: 3.74,
     marginsUsed: 0,
     openingBalance: 3.74,
