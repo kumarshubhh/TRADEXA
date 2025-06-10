@@ -19,8 +19,10 @@ const userSchema = new Schema({
 
 
 userSchema.plugin(passportLocalMongoose, {
-    usernameField: 'email', // Email as username
-    usernameLowerCase: true // Emails ko lowercase me normalize kare
+  usernameField: 'email',
+  usernameQueryFields: ['email'],
+  usernameUnique: false // ⭐️ very important to avoid creating `username_1` index
 });
+
 
 module.exports = mongoose.model('User', userSchema);
