@@ -34,18 +34,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // );
 // app.use(cors());
 
-const allowedOrigins = ['https://tradexafrontend.vercel.app', 'https://tradexadashboard.vercel.app'];
+
+
+const allowedOrigins = [
+  "https://tradexafrontend.vercel.app",
+  "https://tradexadashboard.vercel.app"
+];
 
 app.use(
   cors({
-    origin: (origin, callback) => {
+    origin: function (origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true, // This ensures cookies are allowed
+    credentials: true,
   })
 );
 
@@ -55,16 +60,17 @@ app.use(
 
 
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://tradexadashboard.vercel.app","https://tradexafrontend.vercel.app"); // Frontend origin
-  res.header("Access-Control-Allow-Credentials", "true"); // Allow cookies
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
+
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "https://tradexadashboard.vercel.app","https://tradexafrontend.vercel.app"); // Frontend origin
+//   res.header("Access-Control-Allow-Credentials", "true"); // Allow cookies
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//   next();
+// });
 
 
 const JWT_SECRET = "Mysecretecode";
