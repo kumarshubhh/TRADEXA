@@ -36,63 +36,45 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-const allowedOrigins = [
-  "https://tradexafrontend.vercel.app",
-  "https://tradexadashboard.vercel.app"
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
-
-
-
-
-
-
-
-
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "https://tradexadashboard.vercel.app","https://tradexafrontend.vercel.app"); // Frontend origin
-//   res.header("Access-Control-Allow-Credentials", "true"); // Allow cookies
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-//   );
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-//   next();
-// });
-
+  
 
 const JWT_SECRET = "Mysecretecode";
+
+// const sessionOptions = {
+//   secret: "Mysecretecode",
+//   resave: false,
+//   saveUninitialized: true,
+//   store: MongoStore.create({
+//     mongoUrl: uri,
+//     touchAfter: 24 * 3600, // Time period in seconds
+//   }),
+//   cookie: {
+//     secure: false,
+//     httpOnly: true,
+//     sameSite: "lax",
+//     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+//     maxAge: 7 * 24 * 60 * 60 * 1000,
+    
+//   },
+//  cookie: { secure: false },
+// };
 
 const sessionOptions = {
   secret: "Mysecretecode",
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: uri,
-    touchAfter: 24 * 3600, // Time period in seconds
+    touchAfter: 24 * 3600, // Optional
   }),
   cookie: {
-    secure: false,
+    secure: true,         // ⬅️ Required for Render (HTTPS)
     httpOnly: true,
-    sameSite: "lax",
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    
-  },
- cookie: { secure: false },
+    sameSite: "none",     // ⬅️ Required for cross-site cookie (Vercel)
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  }
 };
+
 
 app.use(session(sessionOptions));
 app.use(passport.initialize());
