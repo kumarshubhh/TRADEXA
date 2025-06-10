@@ -22,18 +22,6 @@ const PORT = process.env.PORT || 3001;
 const uri = process.env.MONGO_URL;
 
 
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// app.use(
-//   cors({
-//       origin: ["http://localhost:5173","http://localhost:5174"],// Replace with your frontend's URL
-//       credentials: true, // Allow cookies
-//   })
-// );
-// app.use(cors());
-
 const allowedOrigins = [
   "https://tradexafrontend.vercel.app",
   "https://tradexadashboard.vercel.app"
@@ -51,6 +39,20 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.use(
+//   cors({
+//       origin: ["http://localhost:5173","http://localhost:5174"],// Replace with your frontend's URL
+//       credentials: true, // Allow cookies
+//   })
+// );
+// app.use(cors());
+
+
 
 
 
@@ -437,6 +439,7 @@ app.get("/orders", async (req, res) => {
 
 
 app.get("/api/summary", (req, res) => {
+  console.log("User in session:", req.user);
   if (!req.isAuthenticated()) {
     return res.status(401).json({ message: "Unauthorized" });
   }
