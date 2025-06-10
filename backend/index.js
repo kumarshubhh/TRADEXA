@@ -22,6 +22,7 @@ const PORT = process.env.PORT || 3001;
 const uri = process.env.MONGO_URL;
 
 
+
 const allowedOrigins = [
   "https://tradexafrontend.vercel.app",
   "https://tradexadashboard.vercel.app"
@@ -44,13 +45,6 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(
-//   cors({
-//       origin: ["http://localhost:5173","http://localhost:5174"],// Replace with your frontend's URL
-//       credentials: true, // Allow cookies
-//   })
-// );
-// app.use(cors());
 
 
 
@@ -60,24 +54,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const JWT_SECRET = "Mysecretecode";
 
-// const sessionOptions = {
-//   secret: "Mysecretecode",
-//   resave: false,
-//   saveUninitialized: true,
-//   store: MongoStore.create({
-//     mongoUrl: uri,
-//     touchAfter: 24 * 3600, // Time period in seconds
-//   }),
-//   cookie: {
-//     secure: false,
-//     httpOnly: true,
-//     sameSite: "lax",
-//     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-//     maxAge: 7 * 24 * 60 * 60 * 1000,
-    
-//   },
-//  cookie: { secure: false },
-// };
+
 
 const sessionOptions = {
   secret: "Mysecretecode",
@@ -95,6 +72,7 @@ const sessionOptions = {
   }
 };
 
+app.set("trust proxy", 1); // ⬅️ Add this line above `app.use(session(...))`
 
 app.use(session(sessionOptions));
 app.use(passport.initialize());
@@ -440,6 +418,7 @@ app.get("/orders", async (req, res) => {
 
 app.get("/api/summary", (req, res) => {
   console.log("User in session:", req.user);
+  console.log("Session:", req.session);
   if (!req.isAuthenticated()) {
     return res.status(401).json({ message: "Unauthorized" });
   }
